@@ -30,7 +30,7 @@ app.use(function (req, res, next) {
 
 app.use(express.json());// Or 3rd party bodyParser
 
-// Get all tasklists
+//CRUD methods for tasklists
 app.get('/tasklists', (req, res) => {
     TaskList.find({})
         .then((lists) => {
@@ -51,7 +51,7 @@ app.get('/tasklists/:tasklistId', (req, res) => {
         res.status(500).send(console.log(error));
     })
 });
-// Creating a TaskList
+
 app.post('/tasklists', (req, res) => {
     console.log(req.body);
 
@@ -96,6 +96,62 @@ app.delete('/tasklists/:tasklistId', (req, res) => {
         console.log(error)
     })
 });
+
+
+//CRUD methods for task and asssigning to tasklists
+
+app.get('/tasklists/:tasklistId/tasks', (req, res) => {
+    Task.find({_taskListId : req.params.tasklistId})
+    .then((tasks) => {
+        res.status(200).send(tasks);
+    })
+    .catch ((error) => {
+        res.status(500).send(console.log(error));
+    })
+});
+
+app.post('/tasklists/:tasklistId/tasks', (req, res) => {
+    let taskObj = {'title' : req.body.title, '_taskListId' : req.params.tasklistId}
+    Task(taskObj).save()
+    .then((task) => {
+        res.status(200).send(task);
+    })
+    .catch ((error) => {
+        res.status(500).send(console.log(error));
+    })
+});
+
+app.get('/tasklists/:tasklistId/tasks/:taskId', (req, res) => {
+    Task.findOne({_taskListId : req.params.tasklistId , _id : req.params.taskId})
+    .then((tasks) => {
+        res.status(200).send(tasks);
+    })
+    .catch ((error) => {
+        res.status(500).send(console.log(error));
+    })
+});
+
+app.patch('/tasklists/:tasklistId/tasks/:taskId' , (req, res) => {
+    Task.findOneAndUpdate({ _taskListId : req.params.tasklistId , _id : req.params.taskId}, { $set: req.body})
+    .then((tasks) => {
+        res.status(200).send(tasks);
+    })
+    .catch ((error) => {
+        res.status(500).send(console.log(error));
+    })
+});
+
+
+app.delete('/tasklists/:tasklistId/tasks/:taskId', (req, res) => {
+    Task.findOneAndDelete({_taskListId : req.params.tasklistId , _id : req.params.taskId})
+    .then((tasks) => {
+        res.status(200).send(tasks);
+    })
+    .catch ((error) => {
+        res.status(500).send(console.log(error));
+    })
+});
+
 
 app.listen(3000, () => {
     console.log("Server started on port 3000");
