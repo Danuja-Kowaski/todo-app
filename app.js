@@ -88,12 +88,20 @@ app.patch('/tasklists/:tasklistId', (req, res)  => {
 });
 
 app.delete('/tasklists/:tasklistId', (req, res) => {
-    TaskList.findByIdAndDelete(req.params.tasklistId)
+    //deletes all tasks when deleting tasklsits
+    const deleteAllContainingTask = (tasklist) => {
+        Task.deleteMany({ _tasklistId : req.body.tasklistId})
+        .then(()=> {return tasklist})
+        .catch((error) => {console.log(error)})
+    }
+
+    const responseTaskList = TaskList.findByIdAndDelete(req.params.tasklistId)
     .then((tasklist) => {
+        deleteAllContainingTask(tasklist)
         res.status(200).send(tasklist);
     })
     .catch ((error) => {
-        console.log(error)
+        res.status(500).send(responseTaskList)
     })
 });
 
@@ -149,7 +157,7 @@ app.delete('/tasklists/:tasklistId/tasks/:taskId', (req, res) => {
     })
     .catch ((error) => {
         res.status(500).send(console.log(error));
-    })
+    }) 
 });
 
 
