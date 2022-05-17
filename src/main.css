@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&family=Koulen&family=Lobster&family=Raleway&family=Roboto:ital,wght@1,300&display=swap');
+html, body {
+    /* background: linear-gradient(#e66465, #9198e5); */
+    font-family: 'Comfortaa', cursive;
+    font-family: 'Koulen', cursive;
+    font-family: 'Lobster', cursive;
+    font-family: 'Raleway', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(0.15turn, #3f87a6, #ebf8e1, #f69d3c);
+}
