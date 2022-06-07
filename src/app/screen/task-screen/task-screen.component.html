@@ -1,5 +1,52 @@
-<div class="text-black">
-    <h1 class="mb-3">Task Screen</h1>
-    <button class="btn-primary">Hello</button>
-    <button class="btn-danger">Cancel</button>
+<div class="container ">
+  <h2 class="bg-info p-2 fw-bold text-center">Task Manager App</h2>
+  <div class="row">
+    <div class="col-md-4 col-sm-12">
+      <div class="row">
+        <div class="col-6">
+          <h1 class="fw-bold float-start">Task Lists</h1>
+        </div>
+        <div class="col-6">
+          <button class="btn btn-success float-end"
+          routerLink="/new-task-list">Add Task List</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <ol class="list-group list-group-numbered">
+            <a  [routerLink]="['/task-list', taskL._id]"
+                routerLinkActive="active"
+                *ngFor="let taskL of taskList" class="list-group-item list-group-item-action">
+              {{taskL.title}}
+              <span
+              (click)="deleteTaskList(taskL)"
+              class="badge bg-danger rounded-pill hover-shadow">X</span>
+            </a>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 col-sm-12">
+      <div class="row">
+        <div class="col-6">
+          <h1 class="fw-bold float-start">Tasks</h1>
+        </div>
+        <div class="col-6">
+          <button class="btn btn-success float-end"
+          (click)="AddNewTask()">Add Task</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <ol class="list-group list-group-numbered">
+            <a  *ngFor="let itemT of tasks" class="list-group-item list-group-item-action" (click)="taskClicked(itemT)">
+              {{itemT.title}}
+              <span (click)="deleteTask(itemT)"
+              class="badge bg-danger rounded-pill hover-shadow">X</span>
+
+            </a>
+          </ol>
+        </div>
+    </div>
+  </div>
 </div>

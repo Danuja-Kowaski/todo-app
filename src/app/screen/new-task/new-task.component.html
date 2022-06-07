@@ -1,0 +1,21 @@
+<div class="container text-center mt-5">
+    <div class="row">
+        <div class="mb-3">
+            <form>
+                <div class="form-group">
+                  <h3 for="task" routerLink="/">Add a new Task </h3>
+                  <input #taskInput type="text" class="form-control" id="task" placeholder="task">
+                </div>
+              </form>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div>
+                    <button type="button"class="btn btn-danger m-2" routerLink="../">Cancel</button>
+                    <button type="button"class="btn btn-primary m-2" (click)="AddNewTask(taskInput.value)">Add Task List</button>
+                </div>    
+            </div>
+        </div>
+    </div>
+
+</div>
