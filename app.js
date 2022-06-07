@@ -4,7 +4,6 @@ const mongoose = require('./database/mongoose');
 
 const TaskList = require('./database/models/taskList');
 const Task = require('./database/models/task');
-const { rawListeners } = require('./database/models/taskList');
 
 //try using async await instead
 
